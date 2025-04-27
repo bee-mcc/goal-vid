@@ -1,0 +1,30 @@
+<div class="goal-container">
+  <div class="self-managed-goals">
+    <h3>Self-Managed Goals</h3>
+    <div class="goal-cards">
+      <ng-container *ngFor="let goal of goalList">
+        <div class="goal-card" *ngIf="isSelfManaged(goal)">
+          <div class="goal-card-content">
+            <h4>{{ goal.name }}</h4>
+            <p class="goal-date">{{ goal.date }}</p>
+            <p class="goal-amount">${{ goal.amount }}</p>
+          </div>
+        </div>
+      </ng-container>
+    </div>
+  </div>
+  <div class="managed-goals">
+    <h3>Managed Goals</h3>
+    <div class="goal-cards">
+      <ng-container *ngFor="let goal of goalList">
+        <div class="goal-card" *ngIf="isManaged(goal)">
+          <div class="goal-card-content">
+            <h4>{{ goal.name }}</h4>
+            <p class="goal-date">{{ goal.date }}</p>
+            <p class="goal-amount">${{ goal.amount }}</p>
+          </div>
+        </div>
+      </ng-container>
+    </div>
+  </div>
+</div>
