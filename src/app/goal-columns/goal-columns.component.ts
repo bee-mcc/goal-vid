@@ -36,10 +36,13 @@ interface Goal {
             ])
           ], { optional: true }),
           
-          // Step 2: Shorter delay to ensure all cards have disappeared
-          animate('200ms', style({}))
-          
           // After this sequence completes, new cards will appear without animation
+          query(':enter', [
+            style({ opacity: 0, transform: 'translateY(-100px)' }),
+            stagger(50, [
+              animate('350ms 50ms ease-out', style({ opacity: 1, transform: 'translateY(0)' }))
+            ])
+          ], { optional: true })
         ])
       ])
     ])
@@ -125,19 +128,5 @@ export class GoalColumnsComponent implements OnChanges {
     return goal.managementType === ManagementType.SELF_MANAGED;
   }
   
-  // Method to handle animation done event
-  onAnimationDone() {
-    if (this.animationInProgress) {
-      // Clear the lists first
-      this.selfManagedGoals = [];
-      this.managedGoals = [];
-      
-      // Wait 1 second before showing new cards
-      setTimeout(() => {
-        this.selfManagedGoals = [...this.pendingSelfManagedGoals];
-        this.managedGoals = [...this.pendingManagedGoals];
-        this.animationInProgress = false;
-      }, 40);
-    }
-  }
+
 }
